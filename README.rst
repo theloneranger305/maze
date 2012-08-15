@@ -2,7 +2,7 @@
 maze
 ====
 
-A maze game in Tkinter.
+A project to do a maze game in Tkinter.
 
 procedural_maze_gen.py and oop_maze_gen.py
 ------------------------------------------
