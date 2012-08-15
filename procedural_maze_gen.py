@@ -109,21 +109,20 @@ def create_maze(width=21, height=21, exit_cell=(1,1)):
     maze, start_cell, steps = visit_cell(maze, exit_cell, cells_visited=[])
     return (maze, start_cell, steps)
 
-def show_maze(maze, exit_cell, start_cell):
+def show_maze(maze, exit_cell, start_cell, verbose=False):
+    MAP = {0: ' ', # path
+           1: '#', # wall
+           2: 'X', # exit
+           3: '@', # start
+          }
     x0, y0 = exit_cell
-    maze[y0][x0] = 'X'
+    maze[y0][x0] = 2
     x1, y1 = start_cell
-    maze[y1][x1] = '@'
+    maze[y1][x1] = 3
     for row in maze:
-        line = ''
-        for cell in row:
-            if cell == 1:
-                line += '# '
-            elif cell == 0:
-                line += '  '
-            else:
-                line += str(cell) + ' '
-        print line
+        print ' '.join([MAP[col] for col in row])
+    if args.verbose:
+        print "Steps from @ to X:", steps
 
 
 if __name__ == '__main__':
@@ -141,7 +140,5 @@ if __name__ == '__main__':
 
     exit_cell = (args.width-2, args.height-2)
     maze, start_cell, steps = create_maze(args.width, args.height, exit_cell)
-    show_maze(maze, exit_cell, start_cell)
-    if args.verbose:
-        print "Steps from @ to X:", steps
+    show_maze(maze, exit_cell, start_cell, args.verbose)
 
