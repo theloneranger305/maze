@@ -135,7 +135,7 @@ if __name__ == '__main__':
     for arg in ('width', 'height'):
         if getattr(args, arg) % 2 == 0:
             setattr(args, arg, getattr(args, arg) + 1)
-            print "Warning: width must be odd, using %d instead" % args.width
+            print "Warning: %s must be odd, using %d instead" % (arg, getattr(args, arg))
 
     exit_cell = (args.width-2, args.height-2)
     maze, start_cell, min_steps = create_maze(args.width, args.height, exit_cell)
