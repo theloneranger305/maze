@@ -40,20 +40,21 @@ def get_neighbors(cell, maze):
     """
     x, y = cell
     neighbors = []
-    maze_size = len(maze)
+    maze_width = len(maze[0])
+    maze_height = len(maze)
 
-    # Up
-    if y - 2 > 0:
-        neighbors.append((x, y-2))
-    # Down
-    if y + 2 < maze_size:
-        neighbors.append((x, y+2))
     # Left
     if x - 2 > 0:
         neighbors.append((x-2, y))
     # Right
-    if x + 2 < maze_size:
+    if x + 2 < maze_width:
         neighbors.append((x+2, y))
+    # Up
+    if y - 2 > 0:
+        neighbors.append((x, y-2))
+    # Down
+    if y + 2 < maze_height:
+        neighbors.append((x, y+2))
 
     return neighbors
 
@@ -101,8 +102,8 @@ def visit_the_cell(maze, cell, cells_visited, step):
     start_cell, min_steps = get_start(cell, step)
     return (maze, start_cell, min_steps)
 
-def create_maze(size=21, exit_cell=(1,1)):
-    maze = [[1 for _ in range(size)] for _ in range(size)] # full maze (all 1's)
+def create_maze(width=21, height=21, exit_cell=(1,1)):
+    maze = [[1 for _ in range(width)] for _ in range(height)] # full maze (all 1's)
     maze, start_cell, min_steps = visit_the_cell(maze, exit_cell, cells_visited=[], step=0)
     return (maze, start_cell, min_steps)
 
@@ -124,9 +125,21 @@ def show_maze(maze, exit_cell, start_cell):
 
 
 if __name__ == '__main__':
-    maze_size = 21 # Must be odd
-    exit_cell = (maze_size-2, maze_size-2)
-    maze, start_cell, min_steps = create_maze(maze_size, exit_cell)
+    import argparse
+    parser = argparse.ArgumentParser(description="Maze random generator")
+    parser.add_argument('--width', type=int, default=21, help="maze width (must be odd)")
+    parser.add_argument('--height', type=int, default=21, help="maze height (must be odd)")
+    parser.add_argument('-v', '--verbose', action='store_true', help="show steps from @ to X")
+    args = parser.parse_args()
+
+    for arg in ('width', 'height'):
+        if getattr(args, arg) % 2 == 0:
+            setattr(args, arg, getattr(args, arg) + 1)
+            print "Warning: width must be odd, using %d instead" % args.width
+
+    exit_cell = (args.width-2, args.height-2)
+    maze, start_cell, min_steps = create_maze(args.width, args.height, exit_cell)
     show_maze(maze, exit_cell, start_cell)
-    print "Steps from @ to X:", min_steps
+    if args.verbose:
+        print "Steps from @ to X:", min_steps
 
