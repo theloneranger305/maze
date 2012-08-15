@@ -13,7 +13,7 @@ A script to generate random mazes based on `Depth-first search algorithm`_
 
 Example::
 
-    $ python procedural_maze_gen.py
+    $ python procedural_maze_gen.py --width=21 --height=21 --verbose
     # # # # # # # # # # # # # # # # # # # # # 
     #   #               #               #   # 
     #   #   #   # # #   # # # # #   #   #   # 
