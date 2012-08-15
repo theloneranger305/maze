@@ -83,13 +83,15 @@ def remove_wall(maze, cell, neighbor):
         y = y0
     maze[y][x] = 0
 
-def update_start_cell(cell, step, _=[None, None]):
-    if step > _[1]:
-        _[0] = cell
-        _[1] = step
-    return (_[0], _[1] * 2)
+def update_start_cell(cell, depth, _={'start_cell': None, 'recursion_depth': None}):
+    if depth > _['recursion_depth']:
+        _['start_cell'] = cell
+        _['recursion_depth'] = depth
+    start_cell = _['start_cell']
+    steps = _['recursion_depth'] * 2 # wall + cell
+    return (start_cell, steps)
 
-def visit_cell(maze, cell, cells_visited, step):
+def visit_cell(maze, cell, cells_visited, depth=0):
     x, y = cell
     maze[y][x] = 0 
     cells_visited.append(cell)
@@ -98,14 +100,14 @@ def visit_cell(maze, cell, cells_visited, step):
     for neighbor in neighbors:
         if not neighbor in cells_visited:
             remove_wall(maze, cell, neighbor)
-            visit_cell(maze, neighbor, cells_visited, step+1)
-    start_cell, min_steps = update_start_cell(cell, step)
-    return (maze, start_cell, min_steps)
+            visit_cell(maze, neighbor, cells_visited, depth+1)
+    start_cell, steps = update_start_cell(cell, depth)
+    return (maze, start_cell, steps)
 
 def create_maze(width=21, height=21, exit_cell=(1,1)):
     maze = [[1 for _ in range(width)] for _ in range(height)] # full maze (all 1's)
-    maze, start_cell, min_steps = visit_cell(maze, exit_cell, cells_visited=[], step=0)
-    return (maze, start_cell, min_steps)
+    maze, start_cell, steps = visit_cell(maze, exit_cell, cells_visited=[])
+    return (maze, start_cell, steps)
 
 def show_maze(maze, exit_cell, start_cell):
     x0, y0 = exit_cell
@@ -138,8 +140,8 @@ if __name__ == '__main__':
             print "Warning: %s must be odd, using %d instead" % (arg, getattr(args, arg))
 
     exit_cell = (args.width-2, args.height-2)
-    maze, start_cell, min_steps = create_maze(args.width, args.height, exit_cell)
+    maze, start_cell, steps = create_maze(args.width, args.height, exit_cell)
     show_maze(maze, exit_cell, start_cell)
     if args.verbose:
-        print "Steps from @ to X:", min_steps
+        print "Steps from @ to X:", steps
 

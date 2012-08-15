@@ -32,6 +32,7 @@ class Maze(object):
         self.exit_cell = exit_cell
         self.start_cell = None
         self.steps = None
+        self.recursion_depth = None
         self._visited_cells = []
         self._create()
 
@@ -39,7 +40,7 @@ class Maze(object):
         self.maze = [[1 for _ in range(self.width)] for _ in range(self.height)] # full of walls
         self._visit_cell(self.exit_cell)
 
-    def _visit_cell(self, cell, step=0):
+    def _visit_cell(self, cell, depth=0):
         x, y = cell
         self.maze[y][x] = 0 # remove wall
         self._visited_cells.append(cell)
@@ -48,8 +49,8 @@ class Maze(object):
         for neighbor in neighbors:
             if not neighbor in self._visited_cells:
                 self._remove_wall(cell, neighbor)
-                self._visit_cell(neighbor, step+1)
-        self._update_start_cell(cell, step)
+                self._visit_cell(neighbor, depth+1)
+        self._update_start_cell(cell, depth)
 
     def _get_neighbors(self, cell):
         """
@@ -109,10 +110,11 @@ class Maze(object):
             y = y0
         self.maze[y][x] = 0 # remove wall
 
-    def _update_start_cell(self, cell, step):
-        if step > self.steps:
+    def _update_start_cell(self, cell, depth):
+        if depth > self.recursion_depth:
+            self.recursion_depth = depth
             self.start_cell = cell
-            self.steps = step
+            self.steps = depth * 2 # wall + cell
 
     def show(self, verbose=False):
         MAP = {0: ' ', # path
