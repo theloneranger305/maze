@@ -3,17 +3,20 @@
 
 """
 
-Basado en el algoritmo Depth-first search:
+## MAZE GENERATOR ##
+
+Based on Depth-first search algorithm:
 http://en.wikipedia.org/wiki/Maze_visit_the_celleration_algorithm#Depth-first_search
 
-1. Start at a particular cell and call it the "exit."
-2. Mark the current cell as visited, and get a list of its neighbors.
-   For each neighbor, starting with a randomly selected neighbor:
-     1. If that neighbor hasn't been visited, remove the wall between
-        this cell and that neighbor, and then recurse with that neighbor as
-        the current cell.
+  1. Start at a particular cell and call it the "exit."
+  2. Mark the current cell as visited, and get a list of its neighbors.
+     For each neighbor, starting with a randomly selected neighbor:
+       1. If that neighbor hasn't been visited, remove the wall between
+          this cell and that neighbor, and then recurse with that neighbor as
+          the current cell.
 
-Wed Aug 15 10:11:02 ART 2012
+__author__ = "Leonardo Vidarte"
+
 
 """
 
