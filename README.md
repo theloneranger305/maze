@@ -1,4 +1,0 @@
-maze
-====
-
-A maze game
