@@ -28,14 +28,16 @@ def get_neighbors(cell, maze):
     Get the cells next to the cell
 
     Example:
-      Given the cell a
-      The neighbors cells are b
+      Given the following mazes
+      The a neighbor's are b
 
-      # # b # #
-      # # # # #
-      b # a # b
-      # # # # #
-      # # b # #
+      # # # # # # #     # # # # # # #
+      # # # b # # #     # a # b # # #
+      # # # # # # #     # # # # # # #
+      # b # a # b #     # b # # # # #
+      # # # # # # #     # # # # # # #
+      # # # b # # #     # # # # # # #
+      # # # # # # #     # # # # # # #
 
     """
     x, y = cell
@@ -75,9 +77,11 @@ def remove_wall(maze, cell, neighbor):
     """
     x0, y0 = cell
     x1, y1 = neighbor
+    # Vertical
     if x0 == x1:
         x = x0
         y = (y0 + y1) / 2
+    # Horizontal
     if y0 == y1:
         x = (x0 + x1) / 2
         y = y0

@@ -26,18 +26,17 @@ import random
 class Maze(object):
 
     def __init__(self, width=21, height=21, exit_cell=(1, 1)):
-        self.maze = []
         self.width = width
         self.height = height
         self.exit_cell = exit_cell
+        self.create()
+
+    def create(self):
+        self.maze = [[1 for _ in range(self.width)] for _ in range(self.height)] # full of walls
         self.start_cell = None
         self.steps = None
         self.recursion_depth = None
         self._visited_cells = []
-        self._create()
-
-    def _create(self):
-        self.maze = [[1 for _ in range(self.width)] for _ in range(self.height)] # full of walls
         self._visit_cell(self.exit_cell)
 
     def _visit_cell(self, cell, depth=0):
@@ -57,14 +56,16 @@ class Maze(object):
         Get the cells next to the cell
 
         Example:
-          Given the cell a
-          The neighbors cells are b
+          Given the following mazes
+          The a neighbor's are b
 
-          # # b # #
-          # # # # #
-          b # a # b
-          # # # # #
-          # # b # #
+          # # # # # # #     # # # # # # #
+          # # # b # # #     # a # b # # #
+          # # # # # # #     # # # # # # #
+          # b # a # b #     # b # # # # #
+          # # # # # # #     # # # # # # #
+          # # # b # # #     # # # # # # #
+          # # # # # # #     # # # # # # #
 
         """
         x, y = cell
@@ -102,9 +103,11 @@ class Maze(object):
         """
         x0, y0 = cell
         x1, y1 = neighbor
+        # Vertical
         if x0 == x1:
             x = x0
             y = (y0 + y1) / 2
+        # Horizontal
         if y0 == y1:
             x = (x0 + x1) / 2
             y = y0
