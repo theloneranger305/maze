@@ -6,7 +6,7 @@
 ## MAZE GENERATOR ##
 
 Based on Depth-first search algorithm:
-http://en.wikipedia.org/wiki/Maze_visit_celleration_algorithm#Depth-first_search
+http://en.wikipedia.org/wiki/Maze_generation_algorithm#Depth-first_search
 
   1. Start at a particular cell and call it the "exit."
   2. Mark the current cell as visited, and get a list of its neighbors.
