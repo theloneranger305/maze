@@ -116,8 +116,8 @@ def create_maze(width=21, height=21, exit_cell=(1,1)):
 def show_maze(maze, exit_cell, start_cell, verbose=False):
     MAP = {0: ' ', # path
            1: '#', # wall
-           2: 'X', # exit
-           3: '@', # start
+           2: 'B', # exit
+           3: 'A', # start
           }
     x0, y0 = exit_cell
     maze[y0][x0] = 2
@@ -126,16 +126,20 @@ def show_maze(maze, exit_cell, start_cell, verbose=False):
     for row in maze:
         print ' '.join([MAP[col] for col in row])
     if args.verbose:
-        print "Steps from @ to X:", steps
+        print "Steps from A to B:", steps
 
 
 if __name__ == '__main__':
-    import argparse
-    parser = argparse.ArgumentParser(description="Maze random generator")
-    parser.add_argument('--width', type=int, default=21, help="maze width (must be odd)")
-    parser.add_argument('--height', type=int, default=21, help="maze height (must be odd)")
-    parser.add_argument('-v', '--verbose', action='store_true', help="show steps from @ to X")
-    args = parser.parse_args()
+
+    from optparse import OptionParser
+    parser = OptionParser(description="Maze random generator")
+    parser.add_option('-W', '--width', type=int, default=21,
+                      help="maze width (must be odd)")
+    parser.add_option('-H', '--height', type=int, default=21,
+                      help="maze height (must be odd)")
+    parser.add_option('-v', '--verbose', action='store_true',
+                      help="show steps from start to exit")
+    args, _ = parser.parse_args()
 
     for arg in ('width', 'height'):
         if getattr(args, arg) % 2 == 0:

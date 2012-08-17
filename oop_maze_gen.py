@@ -122,8 +122,8 @@ class Maze(object):
     def show(self, verbose=False):
         MAP = {0: ' ', # path
                1: '#', # wall
-               2: 'X', # exit
-               3: '@', # start
+               2: 'B', # exit
+               3: 'A', # start
               }
         x0, y0 = self.exit_cell
         self.maze[y0][x0] = 2
@@ -132,20 +132,20 @@ class Maze(object):
         for row in self.maze:
             print ' '.join([MAP[col] for col in row])
         if verbose:
-            print "Steps from @ to X:", self.steps
+            print "Steps from A to B:", self.steps
 
 
 if __name__ == '__main__':
 
-    import argparse
-    parser = argparse.ArgumentParser(description="Maze random generator")
-    parser.add_argument('--width', type=int, default=21,
-                        help="maze width (must be odd)")
-    parser.add_argument('--height', type=int, default=21,
-                        help="maze height (must be odd)")
-    parser.add_argument('-v', '--verbose', action='store_true',
-                        help="show steps from @ to X")
-    args = parser.parse_args()
+    from optparse import OptionParser
+    parser = OptionParser(description="Maze random generator")
+    parser.add_option('-W', '--width', type=int, default=21,
+                      help="maze width (must be odd)")
+    parser.add_option('-H', '--height', type=int, default=21,
+                      help="maze height (must be odd)")
+    parser.add_option('-v', '--verbose', action='store_true',
+                      help="show steps from start to exit")
+    args, _ = parser.parse_args()
 
     for arg in ('width', 'height'):
         if getattr(args, arg) % 2 == 0:

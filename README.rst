@@ -16,7 +16,7 @@ Scripts to generate random mazes based on `Depth-first search algorithm`_
 
 Example::
 
-    $ python procedural_maze_gen.py --width=21 --height=21 --verbose
+    $ python procedural_maze_gen.py -W 21 -H 21 --verbose
     # # # # # # # # # # # # # # # # # # # # # 
     #   #               #               #   # 
     #   #   #   # # #   # # # # #   #   #   # 
@@ -28,7 +28,7 @@ Example::
     # # # # #   # # # # # # #   # # # # #   # 
     #           #           #       #       # 
     #   # # # # #   # # #   #   #   #   # # # 
-    #   #       #       # @ #   #   #       # 
+    #   #       #       # A #   #   #       # 
     #   # # #   #   #   # # #   #   # # #   # 
     #       #       #   #       #           # 
     #   #   # # # # #   #   # # # # # # #   # 
@@ -36,11 +36,11 @@ Example::
     #   # # # # #   #   # # # # #   #   # # # 
     #   #       #   #       #       #       # 
     #   #   #   #   # # # # #   # # # # #   # 
-    #       #   #                       # X # 
+    #       #   #                       # B # 
     # # # # # # # # # # # # # # # # # # # # # 
-    Steps from @ to X: 128
+    Steps from A to B: 128
 
-    $ python oop_maze_gen.py --verbose --width=41 --height=11
+    $ python oop_maze_gen.py -v -W 41 -H 11
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #   #                       #                           #           #           #
     #   #   #   # # # # # # # # #   # # # # #   # # # # #   #   # # # # #   # # #   #
@@ -50,8 +50,8 @@ Example::
     #   # # #   #   #   # # #   #   # # #   #   # # # # #   #   #   # # # # # # #   #
     #   #       #   #           #       #   #   #       #   #   #           #   #   #
     #   #   # # #   # # # # # # # # #   # # #   #   #   #   # # # # # # #   #   #   #
-    # @ #                           #               #   #                       # X #
+    # A #                           #               #   #                       # B #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-    Steps from @ to X: 142
+    Steps from A to B: 142
 
 

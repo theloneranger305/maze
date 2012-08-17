@@ -227,12 +227,15 @@ class Maze(object):
 
 if __name__ == '__main__':
 
-    import argparse
-    parser = argparse.ArgumentParser(description="Maze game")
-    parser.add_argument('--width', type=int, default=21, help="maze width (must be odd)")
-    parser.add_argument('--height', type=int, default=21, help="maze height (must be odd)")
-    parser.add_argument('--size', type=int, default=10, help="cells size")
-    args = parser.parse_args()
+    from optparse import OptionParser
+    parser = OptionParser(description="Random maze game")
+    parser.add_option('-W', '--width', type=int, default=21,
+                      help="maze width (must be odd)")
+    parser.add_option('-H', '--height', type=int, default=21,
+                      help="maze height (must be odd)")
+    parser.add_option('-s', '--size', type=int, default=10,
+                      help="cell size")
+    args, _ = parser.parse_args()
 
     for arg in ('width', 'height'):
         if getattr(args, arg) % 2 == 0:
