@@ -6,6 +6,10 @@ A little maze game in Tkinter::
 
     $ ./maze.py --width=31 --height=21 --size=10
 
+Madness::
+
+    $ ./maze.py -W 200 -H 200 --size 3
+
 
 procedural_maze_gen.py and oop_maze_gen.py
 ------------------------------------------

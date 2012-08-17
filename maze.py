@@ -3,6 +3,7 @@
 
 import random
 import Tkinter as tk
+import sys
 
 
 class Application(tk.Frame):
@@ -241,6 +242,8 @@ if __name__ == '__main__':
         if getattr(args, arg) % 2 == 0:
             setattr(args, arg, getattr(args, arg) + 1)
             print "Warning: %s must be odd, using %d instead" % (arg, getattr(args, arg))
+
+    sys.setrecursionlimit(5000)
 
     app = Application(args.width, args.height, args.size)
     app.master.title('Maze game')
