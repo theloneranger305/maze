@@ -109,7 +109,7 @@ def visit_cell(maze, cell, cells_visited, depth=0):
     return (maze, start_cell, steps)
 
 def create_maze(width=21, height=21, exit_cell=(1,1)):
-    maze = [[1 for _ in range(width)] for _ in range(height)] # full maze (all 1's)
+    maze = [[1] * width for _ in range(height)] # full of walls
     maze, start_cell, steps = visit_cell(maze, exit_cell, cells_visited=[])
     return (maze, start_cell, steps)
 

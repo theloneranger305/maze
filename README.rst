@@ -2,7 +2,10 @@
 maze
 ====
 
-A project to do a maze game in Tkinter.
+A little maze game in Tkinter::
+
+    $ ./maze.py --width=31 --height=21 --size=10
+
 
 procedural_maze_gen.py and oop_maze_gen.py
 ------------------------------------------

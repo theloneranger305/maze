@@ -32,7 +32,7 @@ class Maze(object):
         self.create()
 
     def create(self):
-        self.maze = [[1 for _ in range(self.width)] for _ in range(self.height)] # full of walls
+        self.maze = [[1] * self.width for _ in range(self.height)] # full of walls
         self.start_cell = None
         self.steps = None
         self.recursion_depth = None
@@ -139,9 +139,12 @@ if __name__ == '__main__':
 
     import argparse
     parser = argparse.ArgumentParser(description="Maze random generator")
-    parser.add_argument('--width', type=int, default=21, help="maze width (must be odd)")
-    parser.add_argument('--height', type=int, default=21, help="maze height (must be odd)")
-    parser.add_argument('-v', '--verbose', action='store_true', help="show steps from @ to X")
+    parser.add_argument('--width', type=int, default=21,
+                        help="maze width (must be odd)")
+    parser.add_argument('--height', type=int, default=21,
+                        help="maze height (must be odd)")
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help="show steps from @ to X")
     args = parser.parse_args()
 
     for arg in ('width', 'height'):
