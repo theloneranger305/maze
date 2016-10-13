@@ -239,19 +239,21 @@ class Maze(object):
 if __name__ == '__main__':
 
     from optparse import OptionParser
+
     parser = OptionParser(description="Random maze game")
     parser.add_option('-W', '--width', type=int, default=21,
-                      help="maze width (must be odd)")
+                      help="maze width (default 21)")
     parser.add_option('-H', '--height', type=int, default=21,
-                      help="maze height (must be odd)")
+                      help="maze height (default 21)")
     parser.add_option('-s', '--size', type=int, default=10,
-                      help="cell size")
+                      help="cell size (default 10)")
     args, _ = parser.parse_args()
 
     for arg in ('width', 'height'):
         if getattr(args, arg) % 2 == 0:
             setattr(args, arg, getattr(args, arg) + 1)
-            print "Warning: %s must be odd, using %d instead" % (arg, getattr(args, arg))
+            print "Warning: %s must be odd, using %d instead" % \
+                (arg, getattr(args, arg))
 
     sys.setrecursionlimit(5000)
 
